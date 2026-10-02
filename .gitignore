@@ -2,3 +2,4 @@
 PedrosDBKeys.env
 .env 
 env.*
+*.env
