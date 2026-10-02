@@ -102,4 +102,17 @@ public class ShiftRepository
         return shift;
     }
     
+    // Delete Shift
+    public void DeleteShift(Shift shift)
+    {
+        string sql = "DELETE FROM Shifts WHERE ShiftID = @ShiftID";
+
+        using MySqlConnection connString = new MySqlConnection(ConnectDB());
+        connString.Open();
+
+        MySqlCommand cmd = new MySqlCommand(sql, connString);
+        cmd.Parameters.AddWithValue("ShiftID", shift.ShiftID);
+        cmd.ExecuteNonQuery();
+    }
+    
 }

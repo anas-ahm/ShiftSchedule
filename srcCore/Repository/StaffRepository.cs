@@ -112,4 +112,15 @@ public class StaffRepository
     }
     
     // Delete Staff
+    public void DeleteStaff(Staff staff)
+    {
+        string sql = "DELETE FROM Staff WHERE StaffID = @StaffID";
+        
+        using MySqlConnection connString = new MySqlConnection(ConnectDB());
+        connString.Open();
+
+        MySqlCommand cmd = new MySqlCommand(sql, connString);
+        cmd.Parameters.AddWithValue("StaffID", staff.StaffID);
+        cmd.ExecuteNonQuery();
+    }
 }

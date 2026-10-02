@@ -102,4 +102,16 @@ public class ShiftTypeRepository
         return shiftType;
     }
     
+    // Delete ShiftType
+    public void DeleteShiftType(ShiftType shiftType)
+    {
+        string sql = "DELETE FROM ShiftType WHERE ShiftTypeID = @ShiftTypeID";
+
+        using MySqlConnection connString = new MySqlConnection(ConnectDB());
+        connString.Open();
+
+        MySqlCommand cmd = new MySqlCommand(sql, connString);
+        cmd.Parameters.AddWithValue("ShiftTypeID", shiftType.ShiftTypeID);
+        cmd.ExecuteNonQuery();
+    }
 }

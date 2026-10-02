@@ -96,4 +96,16 @@ public class ShiftAssignmentRepository
 
         return assignment;
     }
-}
+    
+    // Delete ShiftAssignment
+    public void DeleteShiftAssignment(ShiftAssignment assignment)
+    {
+        string sql = "DELETE FROM ShiftAssignments WHERE AssignmentID = @AssignmentID";
+
+        using MySqlConnection connString = new MySqlConnection(ConnectDB());
+        connString.Open();
+
+        MySqlCommand cmd = new MySqlCommand(sql, connString);
+        cmd.Parameters.AddWithValue("AssignmentID", assignment.ShiftAssignmentID);
+        cmd.ExecuteNonQuery();
+    }
