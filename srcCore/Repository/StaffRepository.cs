@@ -22,11 +22,16 @@ public class StaffRepository
         
         string sql = "INSERT INTO Staff (Name, Phone, Email, IsLeader) VALUES (@Name, @Phone, @Email, @IsLeader)";
 
-        MySqlCommand cmd = new MySqlCommand(ConnectDB());
+        using MySqlConnection connString = new MySqlConnection(ConnectDB());
+        connString.Open();
+        
+        MySqlCommand cmd = new MySqlCommand(sql, connString);
         cmd.Parameters.AddWithValue("Name", staff.Name);
         cmd.Parameters.AddWithValue("Phone", staff.Phone);
         cmd.Parameters.AddWithValue("Email", staff.Email);
         cmd.Parameters.AddWithValue("IsLeader", staff.IsLeader);
+
+        cmd.ExecuteNonQuery();
 
         return staff;
     }
