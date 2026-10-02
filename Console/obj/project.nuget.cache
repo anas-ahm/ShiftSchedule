@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "o0ea1dMAeLI=",
+  "success": true,
+  "projectFilePath": "/Users/anas.ahm/Documents/Coding/Datamatiker/programmering/Study-projects/2. Semester/Database/PedrosCantina/Console/Console.csproj",
+  "expectedPackageFiles": [
+    "/Users/anas.ahm/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/8.0.2/microsoft.extensions.dependencyinjection.abstractions.8.0.2.nupkg.sha512",
+    "/Users/anas.ahm/.nuget/packages/microsoft.extensions.logging.abstractions/8.0.2/microsoft.extensions.logging.abstractions.8.0.2.nupkg.sha512",
+    "/Users/anas.ahm/.nuget/packages/mysqlconnector/2.6.2/mysqlconnector.2.6.2.nupkg.sha512"
+  ],
+  "logs": []
+}
