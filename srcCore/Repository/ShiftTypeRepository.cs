@@ -32,4 +32,30 @@ public class ShiftTypeRepository
         return shiftType;
     }
     
+    // Read All ShiftTypes
+    public List<ShiftType> ReadAllShiftTypes()
+    {
+        List<ShiftType> allShiftTypes = new List<ShiftType>();
+        string sql = "SELECT * FROM ShiftType";
+
+        using MySqlConnection connString = new MySqlConnection(ConnectDB());
+        connString.Open();
+
+        MySqlCommand cmd = new MySqlCommand(sql, connString);
+        using MySqlDataReader reader = cmd.ExecuteReader();
+
+        while (reader.Read())
+        {
+            ShiftType shiftTypeToAdd = new ShiftType();
+            shiftTypeToAdd.ShiftTypeID = reader.GetInt32(reader.GetOrdinal("ShiftTypeID"));
+            shiftTypeToAdd.Name = reader.GetString(reader.GetOrdinal("Name"));
+            shiftTypeToAdd.StartTime = reader.GetTimeSpan(reader.GetOrdinal("StartTime"));
+            shiftTypeToAdd.EndTime = reader.GetTimeSpan(reader.GetOrdinal("EndTime"));
+
+            allShiftTypes.Add(shiftTypeToAdd);
+        }
+
+        return allShiftTypes;
+    }
+    
 }

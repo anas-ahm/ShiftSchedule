@@ -7,6 +7,9 @@ public class Shift
     private TimeSpan _startTime;
     private TimeSpan _endTime;
 
+    // Empty Constructor
+    public Shift() { }
+    
     public Shift(DateTime shiftDate, TimeSpan startTime, TimeSpan endTime)
     {
         ShiftDate = shiftDate;

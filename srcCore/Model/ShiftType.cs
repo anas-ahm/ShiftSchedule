@@ -6,6 +6,9 @@ public class ShiftType
     private string _name;
     private TimeSpan _startTime;
     private TimeSpan _endTime;
+    
+    // Empty Constructor
+    public ShiftType() { }
 
     public ShiftType(string name, TimeSpan startTime, TimeSpan endTime)
     {

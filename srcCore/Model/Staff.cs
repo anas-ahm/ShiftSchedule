@@ -15,6 +15,9 @@ public class Staff
         Email = email;
         IsLeader = isLeader;
     }
+    
+    // Empty Constructor
+    public Staff() { }
 
     public int StaffID
     {

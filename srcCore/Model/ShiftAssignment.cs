@@ -5,7 +5,10 @@ public class ShiftAssignment
     private int _shiftAssignmentID;
     private int _staffID;
     private int _shiftID;
-
+    
+    
+    public ShiftAssignment() { }
+    
     public ShiftAssignment(int staffID, int shiftID)
     {
         StaffID = staffID;

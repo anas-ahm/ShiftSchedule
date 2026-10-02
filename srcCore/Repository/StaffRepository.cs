@@ -37,6 +37,33 @@ public class StaffRepository
     }
     
     // Read All Staff
+    public List<Staff> ReadAllStaff()
+    {
+        
+        
+        List<Staff> allStaff = new List<Staff>();
+        string sql = "SELECT * FROM Staff";
+
+        using MySqlConnection connString = new MySqlConnection(ConnectDB());
+        connString.Open();
+
+        MySqlCommand cmd = new MySqlCommand(sql, connString);
+        using MySqlDataReader reader = cmd.ExecuteReader();
+
+        while (reader.Read())
+        {
+            Staff staffToAdd = new Staff();
+            staffToAdd.StaffID = reader.GetInt32(reader.GetOrdinal("StaffID"));
+            staffToAdd.Name = reader.GetString(reader.GetOrdinal("Name"));
+            staffToAdd.Phone = reader.GetString(reader.GetOrdinal("Phone"));
+            staffToAdd.Email = reader.GetString(reader.GetOrdinal("Email"));
+            staffToAdd.IsLeader = reader.GetBoolean(reader.GetOrdinal("IsLeader"));
+            
+            allStaff.Add(staffToAdd);
+        }
+        
+        return allStaff;
+    }
     
     // Read Staff By ID
     
