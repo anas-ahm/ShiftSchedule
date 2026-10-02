@@ -58,4 +58,48 @@ public class ShiftRepository
         return allShifts;
     }
     
+    // Read Shift By ID
+    public Shift ReadShiftByID(int id)
+    {
+        string sql = "SELECT * FROM Shifts WHERE ShiftID = @id";
+
+        using MySqlConnection connString = new MySqlConnection(ConnectDB());
+        connString.Open();
+
+        MySqlCommand cmd = new MySqlCommand(sql, connString);
+        cmd.Parameters.AddWithValue("id", id);
+        using MySqlDataReader reader = cmd.ExecuteReader();
+
+        Shift shiftToRead = new Shift();
+
+        while (reader.Read())
+        {
+            shiftToRead.ShiftID = reader.GetInt32(reader.GetOrdinal("ShiftID"));
+            shiftToRead.ShiftDate = reader.GetDateTime(reader.GetOrdinal("ShiftDate"));
+            shiftToRead.StartTime = reader.GetTimeSpan(reader.GetOrdinal("StartTime"));
+            shiftToRead.EndTime = reader.GetTimeSpan(reader.GetOrdinal("EndTime"));
+        }
+
+        return shiftToRead;
+    }
+    
+    // Update Shift
+    public Shift UpdateShift(Shift shift)
+    {
+        string sql = "UPDATE Shifts SET ShiftDate = @ShiftDate, StartTime = @StartTime, EndTime = @EndTime WHERE ShiftID = @ShiftID";
+
+        using MySqlConnection connString = new MySqlConnection(ConnectDB());
+        connString.Open();
+
+        MySqlCommand cmd = new MySqlCommand(sql, connString);
+        cmd.Parameters.AddWithValue("ShiftID", shift.ShiftID);
+        cmd.Parameters.AddWithValue("ShiftDate", shift.ShiftDate);
+        cmd.Parameters.AddWithValue("StartTime", shift.StartTime);
+        cmd.Parameters.AddWithValue("EndTime", shift.EndTime);
+
+        cmd.ExecuteNonQuery();
+
+        return shift;
+    }
+    
 }

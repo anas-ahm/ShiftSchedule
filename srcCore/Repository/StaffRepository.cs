@@ -66,8 +66,50 @@ public class StaffRepository
     }
     
     // Read Staff By ID
+    public Staff ReadStaffByID(int id)
+    {
+        string sql = "SELECT * FROM Staff WHERE Staff.StaffID = @id";
+        
+        using MySqlConnection connString = new MySqlConnection(ConnectDB());
+        connString.Open();
+
+        MySqlCommand cmd = new MySqlCommand(sql, connString);
+        cmd.Parameters.AddWithValue("id", id);
+        using MySqlDataReader reader = cmd.ExecuteReader();
+        
+        Staff staffToRead = new Staff();
+
+        while (reader.Read())
+        {
+            staffToRead.StaffID = reader.GetInt32(reader.GetOrdinal("StaffID"));
+            staffToRead.Name = reader.GetString(reader.GetOrdinal("Name"));
+            staffToRead.Phone = reader.GetString(reader.GetOrdinal("Phone"));
+            staffToRead.Email = reader.GetString(reader.GetOrdinal("Email"));
+            staffToRead.IsLeader = reader.GetBoolean(reader.GetOrdinal("IsLeader"));
+        }
+
+        return staffToRead;
+    }
     
     // Update Staff
+    public Staff UpdateStaff(Staff staff)
+    {
+        string sql = "UPDATE Staff SET Name = @Name, Phone = @Phone, Email = @Email, IsLeader = @IsLeader WHERE StaffID = @StaffID";
+        
+        using MySqlConnection connString = new MySqlConnection(ConnectDB());
+        connString.Open();
+
+        MySqlCommand cmd = new MySqlCommand(sql, connString);
+        cmd.Parameters.AddWithValue("StaffID", staff.StaffID);
+        cmd.Parameters.AddWithValue("Name", staff.Name);
+        cmd.Parameters.AddWithValue("Phone", staff.Phone);
+        cmd.Parameters.AddWithValue("Email", staff.Email);
+        cmd.Parameters.AddWithValue("IsLeader", staff.IsLeader);
+
+        cmd.ExecuteNonQuery();
+
+        return staff;
+    }
     
     // Delete Staff
 }

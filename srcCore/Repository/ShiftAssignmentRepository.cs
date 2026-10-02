@@ -54,4 +54,46 @@ public class ShiftAssignmentRepository
 
         return allAssignments;
     }
+    
+    // Read ShiftAssignment By ID
+    public ShiftAssignment ReadShiftAssignmentByID(int id)
+    {
+        string sql = "SELECT * FROM ShiftAssignments WHERE AssignmentID = @id";
+
+        using MySqlConnection connString = new MySqlConnection(ConnectDB());
+        connString.Open();
+
+        MySqlCommand cmd = new MySqlCommand(sql, connString);
+        cmd.Parameters.AddWithValue("id", id);
+        using MySqlDataReader reader = cmd.ExecuteReader();
+
+        ShiftAssignment assignmentToRead = new ShiftAssignment();
+
+        while (reader.Read())
+        {
+            assignmentToRead.ShiftAssignmentID = reader.GetInt32(reader.GetOrdinal("AssignmentID"));
+            assignmentToRead.StaffID = reader.GetInt32(reader.GetOrdinal("StaffID"));
+            assignmentToRead.ShiftID = reader.GetInt32(reader.GetOrdinal("ShiftID"));
+        }
+
+        return assignmentToRead;
+    }
+    
+    // Update ShiftAssignment
+    public ShiftAssignment UpdateShiftAssignment(ShiftAssignment assignment)
+    {
+        string sql = "UPDATE ShiftAssignments SET StaffID = @StaffID, ShiftID = @ShiftID WHERE AssignmentID = @AssignmentID";
+
+        using MySqlConnection connString = new MySqlConnection(ConnectDB());
+        connString.Open();
+
+        MySqlCommand cmd = new MySqlCommand(sql, connString);
+        cmd.Parameters.AddWithValue("AssignmentID", assignment.ShiftAssignmentID);
+        cmd.Parameters.AddWithValue("StaffID", assignment.StaffID);
+        cmd.Parameters.AddWithValue("ShiftID", assignment.ShiftID);
+
+        cmd.ExecuteNonQuery();
+
+        return assignment;
+    }
 }
