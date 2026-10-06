@@ -2,7 +2,7 @@ namespace srcCore.Repository;
 using Model;
 using MySqlConnector;
 
-public class ShiftTypeRepository
+public class ShiftTypeRepository : IShiftTypeRepository
 {
     // DB Connection String
     private string ConnectDB()

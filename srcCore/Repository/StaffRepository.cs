@@ -2,7 +2,7 @@ namespace srcCore.Repository;
 using Model;
 using MySqlConnector;
 
-public class StaffRepository
+public class StaffRepository : IStaffRepository
 {
     
     // DB Connection String
@@ -89,6 +89,62 @@ public class StaffRepository
         }
 
         return staffToRead;
+    }
+    
+    // Read Shifts from specific Staff
+    // Read Shifts from specific Staff
+    public List<ShiftWithStaff> ReadStaffWorkload(int ID, DateTime start, DateTime end) 
+    {
+    string sql = """
+                 SELECT Staff.StaffID, Staff.Name, Staff.Phone, Staff.Email, Staff.IsLeader,
+                        Shifts.ShiftID, Shifts.ShiftDate, Shifts.StartTime, Shifts.EndTime
+                 FROM Staff
+                 LEFT JOIN ShiftAssignment ON ShiftAssignment.StaffID = Staff.StaffID
+                 LEFT JOIN Shifts ON ShiftAssignment.ShiftID = Shifts.ShiftID
+                                 AND Shifts.ShiftDate >= @start AND Shifts.ShiftDate < @end
+                 WHERE Staff.StaffID = @StaffID
+                 ORDER BY Shifts.ShiftDate, Shifts.StartTime
+                 """;
+
+    using MySqlConnection connString = new MySqlConnection(ConnectDB());
+    connString.Open();
+
+    MySqlCommand cmd = new MySqlCommand(sql, connString);
+    cmd.Parameters.AddWithValue("start", start);
+    cmd.Parameters.AddWithValue("end", end);
+    cmd.Parameters.AddWithValue("StaffID", ID);
+    using MySqlDataReader reader = cmd.ExecuteReader();
+
+    List<ShiftWithStaff> staffWorkLoadList = new List<ShiftWithStaff>();
+
+    while (reader.Read())
+    {
+        // No shifts in this period for this employee
+        if (reader.IsDBNull(reader.GetOrdinal("ShiftID")))
+        {
+            continue;
+        }
+
+        Shift shiftToAdd = new Shift();
+        shiftToAdd.ShiftID = reader.GetInt32(reader.GetOrdinal("ShiftID"));
+        shiftToAdd.ShiftDate = reader.GetDateTime(reader.GetOrdinal("ShiftDate"));
+        shiftToAdd.StartTime = reader.GetTimeSpan(reader.GetOrdinal("StartTime"));
+        shiftToAdd.EndTime = reader.GetTimeSpan(reader.GetOrdinal("EndTime"));
+
+        Staff staffToAdd = new Staff();
+        staffToAdd.StaffID = reader.GetInt32(reader.GetOrdinal("StaffID"));
+        staffToAdd.Name = reader.GetString(reader.GetOrdinal("Name"));
+        staffToAdd.Phone = reader.GetString(reader.GetOrdinal("Phone"));
+        staffToAdd.Email = reader.GetString(reader.GetOrdinal("Email"));
+        staffToAdd.IsLeader = reader.GetBoolean(reader.GetOrdinal("IsLeader"));
+
+        ShiftWithStaff staffWorkLoad = new ShiftWithStaff();
+        staffWorkLoad.Shift = shiftToAdd;
+        staffWorkLoad.Staff.Add(staffToAdd);
+        staffWorkLoadList.Add(staffWorkLoad);
+    }
+
+    return staffWorkLoadList;
     }
     
     // Update Staff

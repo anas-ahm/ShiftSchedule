@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WebRazor")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+68655bcbe2934c9017f403c434c809ab7064eb44")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3c3f48527aa1583fd2b12ebbeae97a5eb577443d")]
 [assembly: System.Reflection.AssemblyProductAttribute("WebRazor")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WebRazor")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
