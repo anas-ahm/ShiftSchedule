@@ -28,34 +28,11 @@ public class ShiftRepository : IShiftRepository
         cmd.Parameters.AddWithValue("EndTime", shift.EndTime);
 
         cmd.ExecuteNonQuery();
+        
+        // Finds and takes the id from DB
+        shift.ShiftID = (int)cmd.LastInsertedId;
 
         return shift;
-    }
-    
-    // Read All Shifts
-    public List<Shift> ReadAllShifts()
-    {
-        List<Shift> allShifts = new List<Shift>();
-        string sql = "SELECT * FROM Shifts";
-
-        using MySqlConnection connString = new MySqlConnection(ConnectDB());
-        connString.Open();
-
-        MySqlCommand cmd = new MySqlCommand(sql, connString);
-        using MySqlDataReader reader = cmd.ExecuteReader();
-
-        while (reader.Read())
-        {
-            Shift shiftToAdd = new Shift();
-            shiftToAdd.ShiftID = reader.GetInt32(reader.GetOrdinal("ShiftID"));
-            shiftToAdd.ShiftDate = reader.GetDateTime(reader.GetOrdinal("ShiftDate"));
-            shiftToAdd.StartTime = reader.GetTimeSpan(reader.GetOrdinal("StartTime"));
-            shiftToAdd.EndTime = reader.GetTimeSpan(reader.GetOrdinal("EndTime"));
-
-            allShifts.Add(shiftToAdd);
-        }
-
-        return allShifts;
     }
     
     // Read Shift By ID
@@ -82,36 +59,6 @@ public class ShiftRepository : IShiftRepository
 
         return shiftToRead;
     }
-    
-    // Read Shift custom Range
-    public List<Shift> ReadShiftsByRange(DateTime start, DateTime end)
-    {
-        string sql = "SELECT * FROM Shifts WHERE ShiftDate >= @start AND ShiftDate < @end";
-        
-        using MySqlConnection connString = new MySqlConnection(ConnectDB());
-        connString.Open();
-        
-        MySqlCommand cmd = new MySqlCommand(sql, connString);
-        cmd.Parameters.AddWithValue("start", start);
-        cmd.Parameters.AddWithValue("end", end);
-        
-        using MySqlDataReader reader = cmd.ExecuteReader();
-
-        List<Shift> shiftsToRead = new List<Shift>();
-        
-        while (reader.Read())
-            {
-            Shift shiftToRead = new Shift();
-            shiftToRead.ShiftID = reader.GetInt32(reader.GetOrdinal("ShiftID"));
-            shiftToRead.ShiftDate = reader.GetDateTime(reader.GetOrdinal("ShiftDate"));
-            shiftToRead.StartTime = reader.GetTimeSpan(reader.GetOrdinal("StartTime"));
-            shiftToRead.EndTime = reader.GetTimeSpan(reader.GetOrdinal("EndTime"));
-            shiftsToRead.Add(shiftToRead);
-            }
-        
-        return shiftsToRead;
-    }
-    
     
     
     // Read Shifts with Staff

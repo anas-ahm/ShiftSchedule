@@ -1,0 +1,12 @@
+/Users/anas.ahm/Documents/Coding/Datamatiker/programmering/Study-projects/2. Semester/Database/PedrosCantina/srcCore/bin/Debug/net10.0/srcCore.deps.json
+/Users/anas.ahm/Documents/Coding/Datamatiker/programmering/Study-projects/2. Semester/Database/PedrosCantina/srcCore/bin/Debug/net10.0/srcCore.dll
+/Users/anas.ahm/Documents/Coding/Datamatiker/programmering/Study-projects/2. Semester/Database/PedrosCantina/srcCore/bin/Debug/net10.0/srcCore.pdb
+/Users/anas.ahm/Documents/Coding/Datamatiker/programmering/Study-projects/2. Semester/Database/PedrosCantina/srcCore/obj/Debug/net10.0/srcCore.csproj.AssemblyReference.cache
+/Users/anas.ahm/Documents/Coding/Datamatiker/programmering/Study-projects/2. Semester/Database/PedrosCantina/srcCore/obj/Debug/net10.0/srcCore.GeneratedMSBuildEditorConfig.editorconfig
+/Users/anas.ahm/Documents/Coding/Datamatiker/programmering/Study-projects/2. Semester/Database/PedrosCantina/srcCore/obj/Debug/net10.0/srcCore.AssemblyInfoInputs.cache
+/Users/anas.ahm/Documents/Coding/Datamatiker/programmering/Study-projects/2. Semester/Database/PedrosCantina/srcCore/obj/Debug/net10.0/srcCore.AssemblyInfo.cs
+/Users/anas.ahm/Documents/Coding/Datamatiker/programmering/Study-projects/2. Semester/Database/PedrosCantina/srcCore/obj/Debug/net10.0/srcCore.csproj.CoreCompileInputs.cache
+/Users/anas.ahm/Documents/Coding/Datamatiker/programmering/Study-projects/2. Semester/Database/PedrosCantina/srcCore/obj/Debug/net10.0/srcCore.dll
+/Users/anas.ahm/Documents/Coding/Datamatiker/programmering/Study-projects/2. Semester/Database/PedrosCantina/srcCore/obj/Debug/net10.0/refint/srcCore.dll
+/Users/anas.ahm/Documents/Coding/Datamatiker/programmering/Study-projects/2. Semester/Database/PedrosCantina/srcCore/obj/Debug/net10.0/srcCore.pdb
+/Users/anas.ahm/Documents/Coding/Datamatiker/programmering/Study-projects/2. Semester/Database/PedrosCantina/srcCore/obj/Debug/net10.0/ref/srcCore.dll

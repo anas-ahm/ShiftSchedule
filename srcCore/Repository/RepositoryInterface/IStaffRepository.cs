@@ -7,7 +7,7 @@ public interface IStaffRepository
     Staff CreateStaff(Staff staff);
     List<Staff> ReadAllStaff();
     Staff ReadStaffByID(int id);
-    List<ShiftWithStaff> ReadStaffWorkload(int ID, DateTime start, DateTime end);
+    List<Shift> ReadStaffWorkload(int ID, DateTime start, DateTime end);
     Staff UpdateStaff(Staff staff);
     void DeleteStaff(Staff staff);
 }

@@ -28,6 +28,9 @@ public class ShiftTypeRepository : IShiftTypeRepository
         cmd.Parameters.AddWithValue("EndTime", shiftType.EndTime);
 
         cmd.ExecuteNonQuery();
+        
+        // Finds and takes the id from DB
+        shiftType.ShiftTypeID = (int)cmd.LastInsertedId;
 
         return shiftType;
     }
